@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'payments',
     'drf_yasg',
 ]
+default_app_config = 'user.apps.UserConfig'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

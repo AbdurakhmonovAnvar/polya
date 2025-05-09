@@ -26,6 +26,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     ], default='user')
     image = models.ImageField(upload_to='user/images',null=True,blank=True)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
