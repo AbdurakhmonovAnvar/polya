@@ -15,11 +15,11 @@ jobs:
     - name: Deploy to server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ 185.191.141.47 }}
-        username: ${{ root }}
-        key: ${{ real1234 }}
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /var/www/polya
+          cd /path/to/yourproject
           git pull origin main
           source venv/bin/activate
           pip install -r requirements.txt
