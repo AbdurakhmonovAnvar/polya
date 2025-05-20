@@ -76,9 +76,9 @@ class CreatePolya(APIView):
 class UpdatePolya(APIView):
     permission_classes = [IsAuthenticated, IsModeratorRole, IsAdminRole]
 
-    def get_object(self, address):
+    def get_object(self, polya_id):
         try:
-            return Polya.objects.get(address__iexact=address)
+            return Polya.objects.get(pk=polya_id)
         except Polya.DoesNotExist:
             return None  # Faqat None qaytaramiz, Response emas
 
@@ -108,8 +108,7 @@ class GetPolya(APIView):
 
 
 class GetAllPolya(APIView):
-    permission_classes = [IsAuthenticated]
-
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         polya = Polya.objects.all()
         serializer = GetAllPolyaSerializer(polya, many=True)
@@ -117,25 +116,17 @@ class GetAllPolya(APIView):
 
 
 class GetPolyaById(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, id):
         try:
             polya = Polya.objects.get(pk=id)
         except Polya.DoesNotExist:
-            return Response({'message':'Polya topilmadi'})
+            return Response({'message': 'Polya topilmadi'})
         serializer = GetPolyaByIdSerializer(polya)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 
-class GetMyLastreversation(APIView):
-    permission_classes = [IsAuthenticated]
 
-    def get(self,request,id):
-        try:
-            polya = Polya.objects.latest('created_at')
-        except Polya.DoesNotExist:
-            return Response({'message':'Sizda hali orderlar mavjud emas'}, status=status.HTTP_400_BAD_REQUEST)
-        serializer = GetMyLastreversationS(polya)
-        return Response(serializer.response,)
+
