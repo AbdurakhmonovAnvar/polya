@@ -8,3 +8,6 @@ class ReservationConfig(AppConfig):
     def ready(self):
         # Ma'lumotlar bazasiga so'rov yubormaslik kerak
         pass
+
+
+
