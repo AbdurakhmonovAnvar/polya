@@ -9,14 +9,14 @@ from .serializers import CreatePaymentSerializers, GetMyPaymentsSerializers, Get
 
 
 class CreatePayment(APIView):
-    permission_classes = IsAuthenticated
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, reservation_id):
-        serializers = CreatePaymentSerializers(data=request.data)
         try:
             reservation = Reservation.objects.get(pk=reservation_id)
         except Reservation.DoesNotExist:
             return Response({'message': 'bunday order yoq'}, status=status.HTTP_400_BAD_REQUEST)
+        serializers = CreatePaymentSerializers(data=request.data)
         if serializers.is_valid():
             serializers.save(reservation=reservation,approve_status=True)
             reservation.status = True

@@ -5,7 +5,11 @@ from .models import Payment
 class CreatePaymentSerializers(serializers.ModelSerializer):
     class Meta:
         model = Payment
-        fields = '__all__'
+        fields = ['reservation', 'approve_status', 'payment_method']  # kerakli maydonlar
+        extra_kwargs = {
+            'reservation': {'required': False},  # bu yer muhim
+            'approve_status': {'required': False},
+        }
 
     def create(self, validated_data):
         request = self.context.get('request')
@@ -16,7 +20,6 @@ class GetMyPaymentsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Payment
         fields = '__all__'
-
 
 
 class GetMyLastPaymentSerializers(serializers.ModelSerializer):
