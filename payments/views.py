@@ -56,3 +56,6 @@ class GetMyLastPayment(APIView):
 
 def nif_tema():
     return 'Nif'
+
+def nif_tema_2():
+    return 'Nif'
