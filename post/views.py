@@ -23,6 +23,7 @@ class CreatePolya(APIView):
         address = request.data.get('address')
         locations = request.data.get('locations')
         owner_phone = request.data.get('owner_phone')
+        type = request.data.get('type')
         if owner_phone is None:
             owner_phone = '0'
         status_value = request.data.get('status', True)
@@ -34,7 +35,8 @@ class CreatePolya(APIView):
                 locations=locations,
                 status=status_value,
                 creator=request.user,
-                owner=owner
+                owner=owner,
+                type=type
             )
         except User.DoesNotExist:
             polya = Polya.objects.create(
@@ -43,6 +45,7 @@ class CreatePolya(APIView):
                 status=status_value,
                 creator=request.user,
                 owner=request.user,
+                type=type
             )
 
         image_urls = []
