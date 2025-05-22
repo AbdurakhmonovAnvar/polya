@@ -53,33 +53,4 @@ class GetMyLastPayment(APIView):
         return Response(serializers.data, status=status.HTTP_200_OK)
 
 
-
-def nif_tema():
-    return 'Nif'
-
-def nif_tema_2():
-    return 'Nif'
-
-def nif_tema_3():
-    return 'Nif'
-
-def nif_tema_4():
-    return 'Nif'
-def nif_tema_5():
-    return 'Nif'
-
-def nif_tema_6():
-    return 'Nif'
-
-def nif_tema_7():
-    return 'Nif'
-def nif_tema_8():
-    return 'Nif'
-
-def nif_tema_9():
-    return 'Nif'
-
-def nif_tema_10():
-    return 'Nif'
-def nif_tema_11():
-    return 'Nif'
+#payments api
