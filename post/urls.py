@@ -10,4 +10,4 @@ urlpatterns = [
 
 ]
 
-# testcha bu ku sa
+#Bu test avtomat
