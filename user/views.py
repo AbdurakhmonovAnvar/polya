@@ -14,6 +14,8 @@ import os
 from django.conf import settings
 from django.core.files.storage import default_storage
 from uuid import uuid4
+
+
 class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -47,7 +49,7 @@ class UserUpdateAPIView(APIView):
         if user is None:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
         if User.objects.filter(username=request.data.get('username', '')).exists():
-            return Response({'message':"bunday user bor"})
+            return Response({'message': "bunday user bor"})
         # Ma'lumotlarni yangilash
         user.username = request.data.get('username', user.username)
         user.phone_number = request.data.get('phone_number', user.phone_number)
@@ -86,6 +88,8 @@ class UserUpdateAPIView(APIView):
             "phone_number": user.phone_number,
             "image_paths": image_urls
         }, status=status.HTTP_200_OK)
+
+
 class CustomTokenObtainView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
@@ -101,11 +105,16 @@ class GatUserDataView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        user_id = request.user.id
-        user_role = request.user.role
+        user = request.user
+        user_id = user.id
+        user_role = user.role
+        username = user.username
+        image = user.image if user.image and hasattr(user.image, 'url') else None
         return Response({
             "user_id": user_id,
-            "role": user_role
+            "role": user_role,
+            "username": username,
+            "image_path": image
         })
 
 
@@ -136,18 +145,18 @@ class UpdateModeratorUser(APIView):
         serializer = ModeratorUpdateSerializers(user, data=request.data, partial=True, context={'request': request})
         if serializer.is_valid():
             serializer.save(role='moderator')
-            return Response({'message':'User change to moderator!'}, status=status.HTTP_200_OK)
+            return Response({'message': 'User change to moderator!'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self,request):
+    def post(self, request):
         try:
             refresh_token = request.data['refresh']
             token = RefreshToken(refresh_token)
             token.blacklist()
             return Response({"message": "Successfully logged out"}, status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
-            return Response({'error':str(e)},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
