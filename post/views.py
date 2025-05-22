@@ -114,6 +114,8 @@ class GetAllPolya(APIView):
         serializer = GetAllPolyaSerializer(polya, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+def get_string():
+    return 'a'
 
 class GetPolyaById(APIView):
     # permission_classes = [IsAuthenticated]
