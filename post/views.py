@@ -117,6 +117,9 @@ class GetAllPolya(APIView):
 def get_string():
     return 'anvar'
 
+def ras()
+    return 1
+
 class GetPolyaById(APIView):
     # permission_classes = [IsAuthenticated]
 
