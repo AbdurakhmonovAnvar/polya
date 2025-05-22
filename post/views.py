@@ -74,7 +74,7 @@ class CreatePolya(APIView):
 
 
 class UpdatePolya(APIView):
-    permission_classes = [IsAuthenticated, IsModeratorRole, IsAdminRole]
+    permission_classes = [IsAuthenticated, IsAdminAndModeratorRole]
 
     def get_object(self, polya_id):
         try:
@@ -125,8 +125,3 @@ class GetPolyaById(APIView):
             return Response({'message': 'Polya topilmadi'})
         serializer = GetPolyaByIdSerializer(polya)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
-
-
