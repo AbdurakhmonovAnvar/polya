@@ -28,7 +28,7 @@ class PolyaUpdateSerializer(serializers.ModelSerializer):
 class PolyaGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Polya
-        fields = ['address', 'locations', 'owner']
+        fields = ['address', 'locations', 'owner','type']
 
 
 class GetAllPolyaSerializer(serializers.ModelSerializer):
