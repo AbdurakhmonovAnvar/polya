@@ -14,3 +14,4 @@ urlpatterns = [
     path('api/update/<str:username>', UserUpdateAPIView.as_view(), name='user-update'),  # username bo'yicha yangilash
 
 ]
+# yangi o'zgartirish
