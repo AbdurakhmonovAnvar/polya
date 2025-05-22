@@ -3,27 +3,24 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main
+      - main  # faqat main branchga push bo'lsa, ishga tushadi
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
 
-    - name: Deploy to server
+    steps:
+    - name: Connect to Server and Deploy
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SERVER_IP }}
         username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
-          cd /path/to/yourproject
+          cd /var/www/html/reklama
           git pull origin main
           source venv/bin/activate
           pip install -r requirements.txt
           python manage.py migrate
           python manage.py collectstatic --noinput
-          sudo systemctl restart gunicorn
-          sudo systemctl restart nginx
+          systemctl restart apache2
