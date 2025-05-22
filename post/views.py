@@ -115,7 +115,7 @@ class GetAllPolya(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 def get_string():
-    return 'a'
+    return 'anvar'
 
 class GetPolyaById(APIView):
     # permission_classes = [IsAuthenticated]
