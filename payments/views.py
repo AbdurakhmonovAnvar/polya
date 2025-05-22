@@ -78,3 +78,6 @@ def nif_tema_8():
 
 def nif_tema_9():
     return 'Nif'
+
+def nif_tema_10():
+    return 'Nif'
