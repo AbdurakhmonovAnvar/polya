@@ -51,3 +51,8 @@ class GetMyLastPayment(APIView):
         payment = Payment.objects.latest('created_at')
         serializers = GetMyPaymentsSerializers(payment)
         return Response(serializers.data, status=status.HTTP_200_OK)
+
+
+
+def nif_tema():
+    return 'Nif'
