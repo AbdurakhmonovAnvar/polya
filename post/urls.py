@@ -8,5 +8,6 @@ urlpatterns = [
     path('api/polya/update/int:polya_id>',UpdatePolya.as_view(),name='update-polya'),
     path('api/polya/get-by-id-polya/<int:id>',GetPolyaById.as_view(),name='get-by-id-polya'),
 
-# testcha bu ku sa
 ]
+
+# testcha bu ku sa
