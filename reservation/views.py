@@ -22,7 +22,8 @@ class CreateReservation(APIView):
         except Reservation.DoesNotExist:
             # return Response({'message': 'Bu vaqtda bron qilingan'}, status=status.HTTP_400_BAD_REQUEST)
             if serializer.is_valid():
-                serializer.save(start_time=reservation.start_time, customer=request.user, polya=polya)
+                start_time = serializer.validated_data.get('start_time')
+                serializer.save(start_time=start_time, customer=request.user, polya=polya)
                 return Response({'message': 'reservation saqlandi!'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
