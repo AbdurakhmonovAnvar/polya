@@ -6,8 +6,8 @@ from user.permissions import IsAdminRole, IsModeratorRole, IsAdminAndModeratorRo
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .serializers import PolyaSerializer, PolyaUpdateSerializer, PolyaGetSerializer, GetAllPolyaSerializer, \
-    GetPolyaByIdSerializer, GetMyLastReversationSerializer
-from .models import Polya
+    GetPolyaByIdSerializer, GetMyLastReversationSerializer, GetStreetSerializers, GetRegionSerializers
+from .models import Polya, Region, Street
 import os
 from uuid import uuid4
 from django.conf import settings
@@ -117,11 +117,6 @@ class GetAllPolya(APIView):
         serializer = GetAllPolyaSerializer(polya, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-def get_string():
-    return 'anvar'
-
-def ras():
-    return "Tar"
 
 class GetPolyaById(APIView):
     # permission_classes = [IsAuthenticated]
@@ -133,3 +128,24 @@ class GetPolyaById(APIView):
             return Response({'message': 'Polya topilmadi'})
         serializer = GetPolyaByIdSerializer(polya)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class GetRegions(APIView):
+    def get(self, request):
+        region = Region.objects.all()
+        serializer = GetRegionSerializers(region, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class GetStreet(APIView):
+    def get(self, request, region_name):
+        try:
+            region = Region.objects.get(name=region_name)
+        except Region.DoesNotExist:
+            return Response({'message': 'Bunday region mavjud emas'}, status=status.HTTP_404_NOT_FOUND)
+
+        street = Street.object.filter(region=region)
+        serializer = GetStreetSerializers(street, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+

@@ -14,3 +14,19 @@ class Polya(models.Model):
 
     class Meta:
         db_table = 'polya'
+
+
+class Region(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'region'
+
+
+class Street(models.Model):
+    name = models.CharField(max_length=50)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'street'
+

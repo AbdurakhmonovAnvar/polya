@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Polya
+from .models import Polya, Region, Street
 
 
 class PolyaSerializer(serializers.ModelSerializer):
@@ -28,7 +28,7 @@ class PolyaUpdateSerializer(serializers.ModelSerializer):
 class PolyaGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Polya
-        fields = ['id','address', 'locations', 'owner','type']
+        fields = ['id', 'address', 'locations', 'owner', 'type']
 
 
 class GetAllPolyaSerializer(serializers.ModelSerializer):
@@ -48,3 +48,14 @@ class GetMyLastReversationSerializer(serializers.ModelSerializer):
         model = Polya
         fields = '__all__'
 
+
+class GetRegionSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Region
+        fields = '__all__'
+
+
+class GetStreetSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Street
+        fields = '__all__'
