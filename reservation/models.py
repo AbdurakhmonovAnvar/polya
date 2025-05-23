@@ -10,7 +10,11 @@ class Reservation(models.Model):
     end_time = models.DateTimeField(auto_now_add=False)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False)
-    payments = models.BooleanField(default=False)
+    payments = models.CharField(max_length=10, choices=[
+        ('pending', 'Pending'),
+        ('paid', 'Paid'),
+        ('cancelled', 'Cancelled'),
+    ], default='pending')
 
     class Meta:
         db_table = 'reservation'

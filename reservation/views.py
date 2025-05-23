@@ -31,7 +31,7 @@ class CreateReservation(APIView):
             return Response({'message': 'Bu vaqtda bron qilingan!'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Saqlash
-        serializer.save(customer=request.user, polya=polya)
+        serializer.save(customer=request.user, polya=polya,status='pending')
         return Response({'message': 'Reservation saqlandi!'}, status=status.HTTP_201_CREATED)
 
 
