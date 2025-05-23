@@ -51,8 +51,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',  # 👈 Bu Swagger uchun foydali
-    ],
+        'rest_framework.permissions.IsAuthenticated',  # Bu barcha APIlar uchun
+    ]
 }
 AUTH_USER_MODEL = 'user.User'
 
