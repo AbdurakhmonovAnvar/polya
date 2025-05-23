@@ -130,14 +130,9 @@ SWAGGER_SETTINGS = {
             'name': 'Authorization',
             'in': 'header',
         }
-    },
-}
 
-SPECTACULAR_DEFAULTS = {
-    # list of authentication/permission classes for spectacular's views.
-    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
-    # None will default to DRF's AUTHENTICATION_CLASSES
-    'SERVE_AUTHENTICATION': None,
+    },
+    'USE_SESSION_AUTH': False,
 }
 
 # Internationalization
