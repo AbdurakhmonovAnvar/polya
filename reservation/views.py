@@ -16,14 +16,13 @@ class CreateReservation(APIView):
         try:
             polya = Polya.objects.get(pk=polya_id)
         except Polya.DoesNotExist:
-            return Response({'message': 'Bunday polya topilmadi!'})
-        reservation = Reservation.objects.get(start_time=request.data.get('start_time'))
-        if reservation:
+            return Response({'message': 'Bunday polya topilmadi!'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            reservation = Reservation.objects.get(start_time=request.data.get('start_time'))
+        except Reservation.DoesNotExist:
             return Response({'message': 'Bu vaqtda bron qilingan'}, status=status.HTTP_400_BAD_REQUEST)
-        if polya is None:
-            return Response({'message': 'Bunday polya yoq'}, status=status.HTTP_400_BAD_REQUEST)
         if serializer.is_valid():
-            serializer.save(customer=request.user, polya=polya)
+            serializer.save(start_time=reservation.start_time, customer=request.user, polya=polya)
             return Response({'message': 'reservation saqlandi!'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
