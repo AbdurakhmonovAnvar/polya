@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2lb=p6gs_8ebk=&82%=jbuay@q=k57mz@e!opsh-gu$vz-#u5-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['topstadion.uz', 'www.topstadion.uz','localhost']
+ALLOWED_HOSTS = ['topstadion.uz', 'www.topstadion.uz', 'localhost']
 
 # Application definition
 
@@ -49,6 +49,9 @@ default_app_config = 'user.apps.UserConfig'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # 👈 Bu Swagger uchun foydali
     ],
 }
 AUTH_USER_MODEL = 'user.User'
@@ -136,6 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 import os
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
