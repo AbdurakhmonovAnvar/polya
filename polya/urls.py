@@ -22,7 +22,6 @@ from drf_yasg import openapi
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 schema_view = get_schema_view(
     openapi.Info(
         title="API Hujjatlari",
@@ -34,14 +33,15 @@ schema_view = get_schema_view(
     ),
     public=True,
     permission_classes=(AllowAny,),
+    authentication_classes=[],
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('user/', include('user.urls')),
-    path('polya/', include('post.urls')),
-    path('reservation/', include('reservation.urls')),
-    path('payment/', include('payments.urls')),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('user/', include('user.urls')),
+                  path('polya/', include('post.urls')),
+                  path('reservation/', include('reservation.urls')),
+                  path('payment/', include('payments.urls')),
+                  path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+                  path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
