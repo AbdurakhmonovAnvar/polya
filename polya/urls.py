@@ -37,11 +37,12 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+                  path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+                  path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
                   path('admin/', admin.site.urls),
                   path('user/', include('user.urls')),
                   path('polya/', include('post.urls')),
                   path('reservation/', include('reservation.urls')),
                   path('payment/', include('payments.urls')),
-                  path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-                  path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-ui'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
