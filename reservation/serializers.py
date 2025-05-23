@@ -29,3 +29,8 @@ class GetMyReservationsSerializers(serializers.ModelSerializer):
         model = Reservation
         fields = '__all__'
 
+
+class GetAllReservationSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Reservation
+        fields = '__all__'

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import CreateReservationSerializer, GetMyReservationsSerializers
+from .serializers import CreateReservationSerializer, GetMyReservationsSerializers, GetAllReservation
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import Reservation
@@ -37,3 +37,12 @@ class GetMyReservation(APIView):
             return Response({'message': 'Bu userda zakaslar yoq'})
         serializers = GetMyReservationsSerializers(reservation)
         return Response(serializers.data, status=status.HTTP_200_OK)
+
+
+class GetAllReservation(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        reservation = Reservation.objects.all()
+        serializer = GetAllReservationSerializers(reservation, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
