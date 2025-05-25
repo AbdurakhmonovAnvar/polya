@@ -7,4 +7,4 @@ class PostConfig(AppConfig):
 
     def ready(self):
         # Ma'lumotlar bazasiga so'rov yubormaslik kerak
-        pass
+        import post.signal
