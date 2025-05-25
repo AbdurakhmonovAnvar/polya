@@ -10,7 +10,7 @@ urlpatterns = [
     path('api/polya/get-my-polyas', GetPolya.as_view(), name='get-my-polya'),
     path('api/polya/update/int:<polya_id>', UpdatePolya.as_view(), name='update-polya'),
     path('api/polya/get-by-id-polya/<int:id>', GetPolyaById.as_view(), name='get-by-id-polya'),
-    path('api/polya/get-by-region-and-street-polya/<str:region_name>/<str:street_name>', GetPolyaById.as_view(),
+    path('api/polya/get-by-region-and-street-polya/<str:region_name>/<str:street_name>', GetPolyaByRegionAndStreet.as_view(),
          name='get-by-region-and-street-polya'),
 
 ]
