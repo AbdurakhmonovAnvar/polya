@@ -49,7 +49,7 @@ class GetAllPolyaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Polya
-        fields = ['address', 'locations', 'owner', 'region_detail', 'street_detail']
+        fields = ['address', 'locations', 'owner', 'region', 'street']
 
 
 class GetPolyaByIdSerializer(serializers.ModelSerializer):
