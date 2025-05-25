@@ -30,3 +30,4 @@ class Street(models.Model):
     class Meta:
         db_table = 'street'
 
+# ass
