@@ -31,10 +31,25 @@ class PolyaGetSerializer(serializers.ModelSerializer):
         fields = ['id', 'address', 'locations', 'owner', 'type']
 
 
+class RegionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Region
+        fields = ['id', 'name']  # yoki boshqa kerakli maydonlar
+
+
+class StreetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Street
+        fields = ['id', 'name']
+
+
 class GetAllPolyaSerializer(serializers.ModelSerializer):
+    region = RegionSerializer(read_only=True)
+    street = StreetSerializer(read_only=True)
+
     class Meta:
         model = Polya
-        fields = ['address', 'locations', 'owner']
+        fields = ['address', 'locations', 'owner', 'region_detail', 'street_detail']
 
 
 class GetPolyaByIdSerializer(serializers.ModelSerializer):
@@ -60,5 +75,4 @@ class GetStreetSerializers(serializers.ModelSerializer):
         model = Street
         fields = '__all__'
 
-
-#ass
+# ass

@@ -23,7 +23,16 @@ class CreatePolya(APIView):
         address = request.data.get('address')
         locations = request.data.get('locations')
         owner_phone = request.data.get('owner_phone')
+        street_name = request.data.get('street')
+        region_name = request.data.get('region')
+        owner_phone = request.data.get('owner_phone')
         type = request.data.get('type')
+        region = Region.objects.get(name=region_name)
+        if region is None:
+            return Response({'message': "Region maydoni bo'sh"}, status=status.HTTP_404_NOT_FOUND)
+        street = Street.objects.get(name=street_name)
+        if street is None:
+            return Response({'message': "Street maydoni bo'sh"}, status=status.HTTP_404_NOT_FOUND)
         if owner_phone is None:
             owner_phone = '0'
         status_value = request.data.get('status', True)
@@ -36,6 +45,8 @@ class CreatePolya(APIView):
                 status=status_value,
                 creator=request.user,
                 owner=owner,
+                street=street,
+                region=region,
                 type=type
             )
         except User.DoesNotExist:
@@ -45,6 +56,8 @@ class CreatePolya(APIView):
                 status=status_value,
                 creator=request.user,
                 owner=request.user,
+                region=region,
+                street=street,
                 type=type
             )
 
@@ -149,4 +162,18 @@ class GetStreet(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-#ass
+class GetPolyaByRegionAndStreet(APIView):
+    def get(self, request, region_name, street_name):
+        try:
+            region = Region.objects.get(name=region_name)
+        except Region.DoesNotExist:
+            return Response({'message': 'Region topilmadi'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            street = Street.objects.get(name=street_name)
+        except Street.DoesNotExist:
+            return Response({'message': 'Street topilmadi'}, status=status.HTTP_404_NOT_FOUND)
+        polya = Polya.objects.filter(region=region, street=street)
+        if polya is None:
+            return Response({'message': "Polyalar topilmadi"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = GetAllPolyaSerializer(polya, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
