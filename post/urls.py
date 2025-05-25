@@ -11,5 +11,5 @@ urlpatterns = [
     path('api/polya/get-by-id-polya/<int:id>',GetPolyaById.as_view(),name='get-by-id-polya'),
 
 ]
-
+#ass
 #Bu test avtomat as
