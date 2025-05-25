@@ -144,8 +144,6 @@ class GetStreet(APIView):
         except Region.DoesNotExist:
             return Response({'message': 'Bunday region mavjud emas'}, status=status.HTTP_404_NOT_FOUND)
 
-        street = Street.object.filter(region=region)
-        serializer = GetStreetSerializers(street, many=True)
+        streets = Street.objects.filter(region=region)
+        serializer = GetStreetSerializers(streets, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
