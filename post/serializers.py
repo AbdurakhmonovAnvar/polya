@@ -59,3 +59,6 @@ class GetStreetSerializers(serializers.ModelSerializer):
     class Meta:
         model = Street
         fields = '__all__'
+
+
+#ass

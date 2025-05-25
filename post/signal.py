@@ -34,3 +34,5 @@ def create_default_regions(sender, **kwargs):
 
     except Exception as e:
         print(f"⚠️ Regionlarni yuklashda xatolik: {e}")
+
+#ass

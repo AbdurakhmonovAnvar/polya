@@ -147,3 +147,6 @@ class GetStreet(APIView):
         streets = Street.objects.filter(region=region)
         serializer = GetStreetSerializers(streets, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+#ass

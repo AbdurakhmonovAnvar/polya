@@ -12,4 +12,4 @@ urlpatterns = [
 
 ]
 
-#Bu test avtomat
+#Bu test avtomat as
