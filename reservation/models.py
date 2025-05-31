@@ -9,8 +9,11 @@ class Reservation(models.Model):
     start_time = models.DateTimeField(auto_now_add=False)
     end_time = models.DateTimeField(auto_now_add=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=False)
-    payments = models.CharField(max_length=10, choices=[
+    method = models.CharField(choices=[
+        ('Click','click'),
+        ('Payme','payme')
+    ])
+    status = models.CharField(max_length=10, choices=[
         ('pending', 'Pending'),
         ('paid', 'Paid'),
         ('cancelled', 'Cancelled'),
